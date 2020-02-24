@@ -31,7 +31,7 @@
         android:id="@+id/addphoto_image"
         android:layout_margin="8dp"
         android:layout_below="@id/toolbar_division"
-        />
+        />s
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editText"
         android:layout_below="@id/toolbar_division"
