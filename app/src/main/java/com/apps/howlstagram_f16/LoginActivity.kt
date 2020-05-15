@@ -142,7 +142,7 @@ class LoginActivity : AppCompatActivity() {
                 if(task.isSuccessful) {
                     // Creating a user account
                     moveMainPage(task.result!!.user)
-                } else if (!task.exception?.message.isNullOrEmpty()) {
+                } else if (task.exception?.message.isNullOrEmpty()) {
                     // Show the error message
                     Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
                 } else {
