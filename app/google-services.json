@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "871683332778-hm6crgvucm90uuqkgjv26k9q91jf5pgl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.apps.howlstagram_f16",
+            "certificate_hash": "33d9175d8fa3051d8e414e57f1b44af251667b55"
+          }
+        },
+        {
           "client_id": "871683332778-6k84d1sk56i2l942ep08ftjnt85ggr6k.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

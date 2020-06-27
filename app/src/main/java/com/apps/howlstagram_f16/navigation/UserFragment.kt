@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.apps.howlstagram_f16.LoginActivity
 import com.apps.howlstagram_f16.MainActivity
 import com.apps.howlstagram_f16.R
+import com.apps.howlstagram_f16.navigation.model.AlarmDTO
 import com.apps.howlstagram_f16.navigation.model.ContentDTO
 import com.apps.howlstagram_f16.navigation.model.FollowDTO
 import com.bumptech.glide.Glide
@@ -143,6 +144,7 @@ class UserFragment : Fragment() {
                 followDTO = FollowDTO()
                 followDTO!!.followerCount = 1
                 followDTO!!.followers[currentUserId!!] = true
+                followerAlarm(uid!!)
 
                 transaction.set(tsDocFollower, followDTO!!)
                 return@runTransaction
@@ -154,10 +156,21 @@ class UserFragment : Fragment() {
             } else {
                 followDTO!!.followerCount = followDTO!!.followerCount + 1
                 followDTO!!.followers[currentUserId!!] = true
+                followerAlarm(uid!!)
             }
             transaction.set(tsDocFollower, followDTO!!)
             return@runTransaction
         }
+    }
+
+    fun followerAlarm(destinationUid: String) {
+        var alarmDTO = AlarmDTO()
+        alarmDTO.destinationUid = destinationUid
+        alarmDTO.userId = auth?.currentUser?.email
+        alarmDTO.uid = auth?.currentUser?.uid
+        alarmDTO.kind = 2
+        alarmDTO.timestamp = System.currentTimeMillis()
+        FirebaseFirestore.getInstance().collection("alarms").document().set(alarmDTO)
     }
 
     fun getProfileImage() {
