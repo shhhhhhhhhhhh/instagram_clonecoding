@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.apps.howlstagram_f16.R
 import com.apps.howlstagram_f16.navigation.model.AlarmDTO
 import com.apps.howlstagram_f16.navigation.model.ContentDTO
+import com.apps.howlstagram_f16.navigation.util.FcmPush
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -129,6 +130,9 @@ class DetailViewFragment : Fragment() {
             alarmDTO.kind = 0
             alarmDTO.timestamp = System.currentTimeMillis()
             FirebaseFirestore.getInstance().collection("alarms").document().set(alarmDTO)
+
+            var message = FirebaseAuth.getInstance()?.currentUser?.email + getString(R.string.alarm_favorite)
+            FcmPush.instance.sendMessage(destinationUid, "Howlstagram", message)
         }
 
     }

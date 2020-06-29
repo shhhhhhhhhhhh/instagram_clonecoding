@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.apps.howlstagram_f16.R
 import com.apps.howlstagram_f16.navigation.model.AlarmDTO
 import com.apps.howlstagram_f16.navigation.model.ContentDTO
+import com.apps.howlstagram_f16.navigation.util.FcmPush
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -54,6 +55,9 @@ class CommentActivity : AppCompatActivity() {
         alarmDTO.timestamp = System.currentTimeMillis()
         alarmDTO.message = message
         FirebaseFirestore.getInstance().collection("alarms").document().set(alarmDTO)
+
+        var msg = FirebaseAuth.getInstance().currentUser?.email + " " + getString(R.string.alarm_comment) + " of " + message
+        FcmPush.instance.sendMessage(destinationUid, "Howlstagram", msg)
     }
 
     inner class CommentRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
